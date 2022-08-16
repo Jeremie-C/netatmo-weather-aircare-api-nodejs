@@ -10,7 +10,7 @@ let expiresInTimestamp = 0
 // create client
 const client = new NetatmoClient(clientId, clientSecret, SCOPE_FULL, { timeout: 1000 })
 
-async function main() {
+async function main () {
   console.log('Starting netatmo API')
   try {
     // authenticate
@@ -31,10 +31,3 @@ async function main() {
 
 // Call the main code
 main()
-
-// NAMain = main moduel
-// NAModule1 : Outdoor
-// NAModule2 : Wind
-// NAModule3 : Rain
-// NAModule4 : Indoor module
-// NHC : Aircare

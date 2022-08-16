@@ -257,33 +257,24 @@ describe('Weather', function () {
   })
 })
 
-describe('Security', function () {
-  const home_id = '1'
-  const event_id = '5'
-  const person_id = '7'
-  const image_id = '8'
-  const key = '9'
+describe('Aircare', function () {
+  const device_id = '01:02'
   let client
   before(async () => {
     client = new NetatmoClient(clientId, clientSecret, scope, {})
     await client.authenticate(authResult.access_token, undefined, 3600 + Date.now() / 1000)
     mock
-      .onGet('/api/gethomedata', { params: { home_id, size: 31 } }).reply(200, { body: [{ type: 'gethomedata' }] })
-      .onGet('/api/geteventsuntil', { params: { home_id, event_id } }).reply(200, { body: [{ type: 'geteventsuntil' }] })
-      .onGet('/api/getlasteventof', { params: { home_id, person_id, offset: 32 } }).reply(200, { body: [{ type: 'getlasteventof' }] })
-      .onGet('/api/getnextevents', { params: { home_id, event_id, size: 33 } }).reply(200, { body: [{ type: 'getnextevents' }] })
-      .onGet('/api/getcamerapicture', { params: { image_id, key } }).reply(200, 'picture')
+      .onGet('/api/gethomecoachsdata', { params: { device_id } }).reply(200, { body: [{ type: 'gethomecoachsdata' }] })
       .onAny().reply(404)
   })
   after(() => {
     mock.reset()
   })
 
-  describe('getHomes API', function () {
-    it('should return homes data', async function () {
-      const result = await client.getHomes(home_id, 31)
-      assert.strictEqual(result[0].type, 'gethomedata')
+  describe('getHomeCoachData API', function () {
+    it('should return homecoach data', async function () {
+      const result = await client.getHomeCoachData(device_id)
+      assert.strictEqual(result[0].type, 'gethomecoachsdata')
     })
   })
-
 })
