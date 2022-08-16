@@ -286,47 +286,4 @@ describe('Security', function () {
     })
   })
 
-  describe('getEventsUntil API', function () {
-    it('should throw error if home id or event id are not provided', async function () {
-      await assert.rejects(async () => { await client.getEventsUntil(null, event_id) }, new Error('Home id and event id must be provided'))
-      await assert.rejects(async () => { await client.getEventsUntil(home_id) }, new Error('Home id and event id must be provided'))
-    })
-    it('should return events', async function () {
-      const result = await client.getEventsUntil(home_id, event_id)
-      assert.strictEqual(result[0].type, 'geteventsuntil')
-    })
-  })
-
-  describe('getLastEventOf API', function () {
-    it('should throw error if home id or person id are not provided', async function () {
-      await assert.rejects(async () => { await client.getLastEventOf(null, person_id) }, new Error('Home id and person id must be provided'))
-      await assert.rejects(async () => { await client.getLastEventOf(home_id) }, new Error('Home id and person id must be provided'))
-    })
-    it('should return person events', async function () {
-      const result = await client.getLastEventOf(home_id, person_id, 32)
-      assert.strictEqual(result[0].type, 'getlasteventof')
-    })
-  })
-
-  describe('getNextEvents API', function () {
-    it('should throw error if home id or event id are not provided', async function () {
-      await assert.rejects(async () => { await client.getNextEvents(null, event_id) }, new Error('Home id and event id must be provided'))
-      await assert.rejects(async () => { await client.getNextEvents(home_id) }, new Error('Home id and event id must be provided'))
-    })
-    it('should return events', async function () {
-      const result = await client.getNextEvents(home_id, event_id, 33)
-      assert.strictEqual(result[0].type, 'getnextevents')
-    })
-  })
-
-  describe('getCameraPicture API', function () {
-    it('should throw error if image id or key are not provided', async function () {
-      await assert.rejects(async () => { await client.getCameraPicture(null, key) }, new Error('Image id and key must be provided'))
-      await assert.rejects(async () => { await client.getCameraPicture(image_id) }, new Error('Image id and key must be provided'))
-    })
-    it('should return picture', async function () {
-      const result = await client.getCameraPicture(image_id, key)
-      assert.strictEqual(result, 'picture')
-    })
-  })
 })
